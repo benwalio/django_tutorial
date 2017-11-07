@@ -51,7 +51,7 @@ class Book(models.Model):
         Returns the url of a particular book instance
         """
 
-        return reverse("book detail", args=[str(self.id)])
+        return reverse("book-detail", args=[str(self.id)])
 
     def display_genre(self):
         """
@@ -59,6 +59,9 @@ class Book(models.Model):
         """
 
         return ", ".join([genre.name for genre in self.genre.all()[:3]])
+
+    class Meta:
+        ordering = ["title"]
 
     display_genre.short_description = "Genre"
 
@@ -102,3 +105,6 @@ class Author(models.Model):
 
     def __str__(self):
         return "%s, %s" % (self.last_name, self.first_name)
+
+    class Meta:
+        ordering = ["last_name"]
